@@ -3,25 +3,26 @@ import types
 from .tagtypes import tagtype
 
 def ECTag(name, data):
-    has_subtags = 0 if type(data) != types.TupleType else 1
-    return unicode.encode(unichr(2*name+has_subtags), "utf-8") + ECTagData(data)
+    has_subtags = 0 if type(data) != tuple else 1
+    return str.encode(chr(2*name+has_subtags) + ECTagData(data), "utf-8")
 
 def ECTagData(data):
-    retval = ''
+    retval = str() #''
     subtag_data = ''
-    if type(data) == types.TupleType:
+    if type(data) == tuple:
         subtags = data[1]
         num_subtags = len(subtags)
         subtag_data += chr(num_subtags)
         for tag in subtags:
             subtag_data += ECTag(tag[0],tag[1])
         data = data[0]
-    if type(data) == types.UnicodeType:
+    if type(data) == str:
         data += '\0'
-        retval += pack('!BB',tagtype['string'], len(data)+len(subtag_data))
+        retval += pack('!BB',tagtype['string'], len(data)+len(subtag_data)).decode('utf-8')
         retval += subtag_data
-        retval += unicode.encode(data, "utf-8")
-    elif type(data) in [types.IntType, types.LongType] :
+        #retval += str.encode(data, 'utf-8')
+        retval += data
+    elif type(data) in [int, int] :
         if data <= pow(2,8):
             fmtStr = '!B'
             tagType = tagtype['uint8']
@@ -41,7 +42,7 @@ def ECTagData(data):
         retval += pack('!BB',tagType,length+len(subtag_data))
         retval += subtag_data
         retval += pack(fmtStr,data)
-    elif type(data) == types.StringType:
+    elif type(data) == bytes:
         retval += pack('!BB',tagtype['hash16'],16+len(subtag_data))
         retval += subtag_data
         retval += data
@@ -52,7 +53,7 @@ def ECTagData(data):
 def ECTagDataStr(data):
     data += '\0'
     fmtStr = '!BB'+bytes(len(data))+'s'
-    return pack(fmtStr, tagtype['string'], len(data), unicode.encode(data, "utf-8"))
+    return pack(fmtStr, tagtype['string'], len(data), str.encode(data, "utf-8"))
 
 def ECTagDataHash(data):
     if len(data) != 16:
