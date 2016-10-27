@@ -1,3 +1,5 @@
-# PyAmuleCMD
+# Py3AmuleCMD
 
-Moved from http://code.google.com/r/castorblex-pyamulecmd/ 
+trying to port on python3
+
+Fork from https://github.com/castorinop/pyamulecmd
