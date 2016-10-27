@@ -11,30 +11,30 @@ port = 4712
 
 class REPL(cmd.Cmd):
     def __init__(self):
-	cmd.Cmd.__init__(self)
-	self.prompt = "> "
-	self.intro = "Welcome to %s %s" % (prog_name, prog_ver)
-	self.ec = None
+        cmd.Cmd.__init__(self)
+        self.prompt = "> "
+        self.intro = "Welcome to %s %s" % (prog_name, prog_ver)
+        self.ec = None
     def preloop(self):
-	passwd = getpass.getpass("Password: ")
-	try:
-	    self.ec = ec.conn(passwd, host, port, prog_name, prog_ver)
-	except ec.ConnectionFailedError:
-	    print("Connection failed")
-	    sys.exit()
+        passwd = getpass.getpass("Password: ")
+        try:
+            self.ec = ec.conn(passwd, host, port, prog_name, prog_ver)
+        except ec.ConnectionFailedError:
+            print("Connection failed")
+            sys.exit()
     def do_quit(self, arg):
-	sys.exit()
+        sys.exit()
     def do_exit(self, arg):
-	sys.exit()
+        sys.exit()
     def do_EOF(self, arg):
-	sys.exit()
+        sys.exit()
     def do_connect(self, arg):
-	self.ec.connect()
+        self.ec.connect()
     def do_disconnect(self, arg):
-	self.ec.disconnect()
+        self.ec.disconnect()
     def do_shutdown(self, arg):
-	self.ec.shutdown()
-	sys.exit()
+        self.ec.shutdown()
+        sys.exit()
 
 def main():
     repl = REPL()
