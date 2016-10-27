@@ -270,7 +270,7 @@ class conn:
         """
         data = ECPacket((codes.op['search_progress'],[]))
         response = self.send_and_receive_packet(data)
-        print repr(response)
+        print(repr(response))
     
     def search_results(self):
         """Get results of last search.
