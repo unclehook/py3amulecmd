@@ -37,8 +37,8 @@ def ReadPacketData(data, utf8_nums = True):
 
 def ECLoginPacket(app, version, password):
     return ECPacket((codes.op['auth_req'],
-            [(codes.tag['client_name'],      unicode(app)),
-             (codes.tag['client_version'],   unicode(version)),
+            [(codes.tag['client_name'],      str(app)),
+             (codes.tag['client_version'],   str(version)),
              (codes.tag['protocol_version'], codes.protocol_version),
              (codes.tag['passwd_hash'],      md5(password).digest())
             ]))

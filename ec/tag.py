@@ -51,7 +51,7 @@ def ECTagData(data):
 
 def ECTagDataStr(data):
     data += '\0'
-    fmtStr = '!BB'+str(len(data))+'s'
+    fmtStr = '!BB'+bytes(len(data))+'s'
     return pack(fmtStr, tagtype['string'], len(data), unicode.encode(data, "utf-8"))
 
 def ECTagDataHash(data):
@@ -175,7 +175,7 @@ def ReadIPv4(data):
     return "%d.%d.%d.%d:%d"% (a,b,c,d,port)
 
 def ReadString(data):
-    return unicode(data[:data.find('\x00')],"utf8")
+    return str(data[:data.find('\x00')],"utf8")
 
 def ReadHash(data):
     if len(data) != 16:

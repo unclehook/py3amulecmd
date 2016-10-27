@@ -256,7 +256,7 @@ class conn:
         """
         packet = (codes.op['search_start'], \
             [(codes.tag['search_type'],(type, \
-                [(codes.tag['search_name'],unicode(keywords))] \
+                [(codes.tag['search_name'],str(keywords))] \
             ))] \
         )
         data = ECPacket(packet)
@@ -292,6 +292,6 @@ class conn:
         
         Returns True when the link was added and False if the link is invalid.
         """
-        data = ECPacket((codes.op['add_link'],[(codes.tag['string'],unicode(link))]))
+        data = ECPacket((codes.op['add_link'],[(codes.tag['string'],str(link))]))
         response = self.send_and_receive_packet(data)
         print (response[0] != codes.op['failed'])
