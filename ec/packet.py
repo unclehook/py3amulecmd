@@ -16,9 +16,11 @@ def ECPacket(data_tuple):
 
 def ECPacketData(data_tuple):
     type, tags = data_tuple
-    return pack('!BB',
-        type,
-        len(tags)) + ''.join([ECTag(name, data) for name,data in tags])
+    #lv_app1 = pack('!BB', type, len(tags))
+    #lv_app2 = b''.join([ECTag(name, data) for name,data in tags])
+    #lv_result = lv_app1 + lv_app2 
+    #return lv_result
+    return pack('!BB', type, len(tags)) + b''.join([ECTag(name, data) for name,data in tags])
 
 def ReadPacketData(data, utf8_nums = True):
     type, = unpack('!B', data[:1])
@@ -40,7 +42,7 @@ def ECLoginPacket(app, version, password):
             [(codes.tag['client_name'],      str(app)),
              (codes.tag['client_version'],   str(version)),
              (codes.tag['protocol_version'], codes.protocol_version),
-             (codes.tag['passwd_hash'],      md5(password).digest())
+             (codes.tag['passwd_hash'],      md5(str.encode(password, "utf-8")).digest())
             ]))
 
 def ECAuthPacket(password):

@@ -7,8 +7,8 @@ def ECTag(name, data):
     return str.encode(chr(2*name+has_subtags), "utf-8") + ECTagData(data)
 
 def ECTagData(data):
-    retval = ''
-    subtag_data = ''
+    retval = bytes()
+    subtag_data = bytes()
     if type(data) == tuple:
         subtags = data[1]
         num_subtags = len(subtags)
@@ -18,6 +18,7 @@ def ECTagData(data):
         data = data[0]
     if type(data) == str:
         data += '\0'
+        #retval += pack('!BB',tagtype['string'], len(data)+len(subtag_data))
         retval += pack('!BB',tagtype['string'], len(data)+len(subtag_data))
         retval += subtag_data
         retval += str.encode(data, "utf-8")

@@ -1,10 +1,10 @@
 coverage:
-	nosetests --with-coverage --cover-package=ec --cover-erase
+	nosetests3 --with-coverage --cover-package=ec --cover-erase
 
 .PHONY: doc
 
 doc: 
-	pydoc -w ec ec.codes ec.conn ec.packet ec.tag ec.tagtypes
+	pydoc3 -w ec ec.codes ec.conn ec.packet ec.tag ec.tagtypes
 	mv ec*.html doc/
 
 gencodes:
