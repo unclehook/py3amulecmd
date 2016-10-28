@@ -1,6 +1,6 @@
 import zlib
+import hashlib
 from struct import pack, unpack
-from hashlib import md5
 from .tag import ECTag, ReadTag
 from . import codes
 
@@ -42,7 +42,7 @@ def ECLoginPacket(app, version, password):
             [(codes.tag['client_name'],      str(app)),
              (codes.tag['client_version'],   str(version)),
              (codes.tag['protocol_version'], codes.protocol_version),
-             (codes.tag['passwd_hash'],      md5(str.encode(password, "utf-8")).digest())
+             (codes.tag['passwd_hash'],      md5(password.encode()).digest())
             ]))
 
 def ECAuthPacket(password):

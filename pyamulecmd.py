@@ -6,7 +6,7 @@ import sys
 prog_name = "pyamulecmd"
 prog_ver  = "0.1"
 
-host = "localhost"
+host = "192.168.149.109"
 port = 4712
 
 class REPL(cmd.Cmd):
