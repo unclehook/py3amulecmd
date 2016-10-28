@@ -40,7 +40,7 @@ def ECLoginPacket(app, version, password):
             [(codes.tag['client_name'],      str(app)),
              (codes.tag['client_version'],   str(version)),
              (codes.tag['protocol_version'], codes.protocol_version),
-             (codes.tag['passwd_hash'],      md5(password.encode('utf-8')).digest())
+             (codes.tag['passwd_hash'],      md5(password).digest())
             ]))
 
 def ECAuthPacket(password):

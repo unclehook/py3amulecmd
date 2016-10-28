@@ -4,10 +4,10 @@ from .tagtypes import tagtype
 
 def ECTag(name, data):
     has_subtags = 0 if type(data) != tuple else 1
-    return str.encode(chr(2*name+has_subtags) + ECTagData(data), "utf-8")
+    return str.encode(chr(2*name+has_subtags), "utf-8") + ECTagData(data)
 
 def ECTagData(data):
-    retval = str() #''
+    retval = ''
     subtag_data = ''
     if type(data) == tuple:
         subtags = data[1]
@@ -18,10 +18,9 @@ def ECTagData(data):
         data = data[0]
     if type(data) == str:
         data += '\0'
-        retval += pack('!BB',tagtype['string'], len(data)+len(subtag_data)).decode('utf-8')
+        retval += pack('!BB',tagtype['string'], len(data)+len(subtag_data))
         retval += subtag_data
-        #retval += str.encode(data, 'utf-8')
-        retval += data
+        retval += str.encode(data, "utf-8")
     elif type(data) in [int, int] :
         if data <= pow(2,8):
             fmtStr = '!B'
@@ -52,7 +51,7 @@ def ECTagData(data):
 
 def ECTagDataStr(data):
     data += '\0'
-    fmtStr = '!BB'+bytes(len(data))+'s'
+    fmtStr = '!BB'+str(len(data))+'s'
     return pack(fmtStr, tagtype['string'], len(data), str.encode(data, "utf-8"))
 
 def ECTagDataHash(data):

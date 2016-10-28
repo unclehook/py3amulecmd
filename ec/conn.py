@@ -142,7 +142,7 @@ class conn:
         response = self.send_and_receive_packet(data)
         # (op['failed'], [(tag['string'], u'All networks are disabled.')])
         # (op['strings'], [(tag['string'], u'Connecting to eD2k...'), (tag['string'], u'Connecting to Kad...')])
-        return (response[0] != codes.op['failed'], map(lambda s:s[1],response[1]))
+        return (response[0] != codes.op['failed'], [s[1] for s in response[1]])
 
     def connect_server(self):
         """Connect remote core to eD2k network.
@@ -169,7 +169,7 @@ class conn:
         # (op['strings'], [(tag['string'], u'Disconnected from eD2k.'), (tag['string'], u'Disconnected from Kad.')])
         data = ECPacket((codes.op['disconnect'],[]))
         response = self.send_and_receive_packet(data)
-        return (response[0] == codes.op['strings'], map(lambda s:s[1],response[1]))
+        return (response[0] == codes.op['strings'], [s[1] for s in response[1]])
 
     def disconnect_server(self):
         """Disconnect remote core from eD2k network."""
@@ -262,7 +262,7 @@ class conn:
         data = ECPacket(packet)
         response = self.send_and_receive_packet(data)
         answer = response[1][0][1]
-        not_connected = (answer == u'Search in progress. Refetch results in a moment!')
+        not_connected = (answer == 'Search in progress. Refetch results in a moment!')
         return (not_connected, answer)
 
     def search_progress(self):
@@ -294,4 +294,4 @@ class conn:
         """
         data = ECPacket((codes.op['add_link'],[(codes.tag['string'],str(link))]))
         response = self.send_and_receive_packet(data)
-        print (response[0] != codes.op['failed'])
+        print((response[0] != codes.op['failed']))

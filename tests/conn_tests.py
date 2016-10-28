@@ -69,7 +69,7 @@ def test_connstate_firewalled():
     status = test_conn.get_connstate()
     assert status['kad_firewall'] == 'firewalled' and \
            status['ed2k'] == 'connected' and \
-           status['server_name'] == u'eDonkeyServer No2' and \
+           status['server_name'] == 'eDonkeyServer No2' and \
            status['kad'] == 'connected' and \
            status['ed2k_id'] == 1890262 and \
            status['client_id'] == 1890262 and \
@@ -116,7 +116,7 @@ def test_connstate_kad_ok():
            status['connstate']['server_name'] == '' and \
            status['connstate']['kad'] == 'connected' and \
            status['connstate']['ed2k_id'] ==  0 and \
-           status['connstate']['client_id'] == 3897341268L and \
+           status['connstate']['client_id'] == 3897341268 and \
            status['connstate']['id'] == '' and \
            status['connstate']['server_addr'] == '' and \
            status['kad_users'] == 312 and \
@@ -141,7 +141,7 @@ def test_conn_socket_error():
     try:
         conn("aaa")
     except ConnectionFailedError as error:
-        print error
+        print(error)
         pass
 
 def test_conn_shutdown():
