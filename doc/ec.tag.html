@@ -1,6 +1,6 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module ec.tag</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="ec.html"><font color="#ffffff">ec</font></a>.tag</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/johkra/projects/pyamulecmd/ec/tag.py">/home/johkra/projects/pyamulecmd/ec/tag.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/cygdrive/c/Users/unclehook/Neon/workspace.py3/py3amulecmd/ec/tag.py">/cygdrive/c/Users/unclehook/Neon/workspace.py3/py3amulecmd/ec/tag.py</a></font></td></tr></table>
     <p></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -34,12 +34,18 @@
  <dl><dt><a name="-ReadIPv4"><strong>ReadIPv4</strong></a>(data)</dt></dl>
  <dl><dt><a name="-ReadInt"><strong>ReadInt</strong></a>(data)</dt></dl>
  <dl><dt><a name="-ReadString"><strong>ReadString</strong></a>(data)</dt></dl>
- <dl><dt><a name="-ReadTag"><strong>ReadTag</strong></a>(data, utf8_nums<font color="#909090">=True</font>)</dt></dl>
- <dl><dt><a name="-ReadTagData"><strong>ReadTagData</strong></a>(data, tag_has_subtags<font color="#909090">=False</font>, utf8_nums<font color="#909090">=True</font>)</dt></dl>
+ <dl><dt><a name="-ReadTag"><strong>ReadTag</strong></a>(data, utf8_nums=True)</dt></dl>
+ <dl><dt><a name="-ReadTagData"><strong>ReadTagData</strong></a>(data, tag_has_subtags=False, utf8_nums=True)</dt></dl>
  <dl><dt><a name="-ReadUTF8Num"><strong>ReadUTF8Num</strong></a>(data)</dt></dl>
- <dl><dt><a name="-pack"><strong>pack</strong></a>(...)</dt><dd><tt>Return&nbsp;string&nbsp;containing&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;packed&nbsp;according&nbsp;to&nbsp;fmt.</tt></dd></dl>
- <dl><dt><a name="-unpack"><strong>unpack</strong></a>(...)</dt><dd><tt>Unpack&nbsp;the&nbsp;string&nbsp;containing&nbsp;packed&nbsp;C&nbsp;structure&nbsp;data,&nbsp;according&nbsp;to&nbsp;fmt.<br>
-Requires&nbsp;len(string)&nbsp;==&nbsp;calcsize(fmt).</tt></dd></dl>
+ <dl><dt><a name="-pack"><strong>pack</strong></a>(...)</dt><dd><tt><a href="#-pack">pack</a>(fmt,&nbsp;v1,&nbsp;v2,&nbsp;...)&nbsp;-&gt;&nbsp;bytes<br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;bytes&nbsp;object&nbsp;containing&nbsp;the&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;packed&nbsp;according<br>
+to&nbsp;the&nbsp;format&nbsp;string&nbsp;fmt.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</tt></dd></dl>
+ <dl><dt><a name="-unpack"><strong>unpack</strong></a>(...)</dt><dd><tt><a href="#-unpack">unpack</a>(fmt,&nbsp;buffer)&nbsp;-&gt;&nbsp;(v1,&nbsp;v2,&nbsp;...)<br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string<br>
+fmt.&nbsp;&nbsp;Requires&nbsp;len(buffer)&nbsp;==&nbsp;calcsize(fmt).&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more<br>
+on&nbsp;format&nbsp;strings.</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -47,5 +53,5 @@ Requires&nbsp;len(string)&nbsp;==&nbsp;calcsize(fmt).</tt></dd></dl>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>tagtype</strong> = {'custom': 1, 'double': 7, 'hash16': 9, 'ipv4': 8, 'string': 6, 'uint16': 3, 'uint32': 4, 'uint64': 5, 'uint8': 2, 'unknown': 0}</td></tr></table>
+<td width="100%"><strong>tagtype</strong> = {'custom': 1, 'double': 7, 'hash16': 9, 'ipv4': 8, 'string': 6, 'uint128': 10, 'uint16': 3, 'uint32': 4, 'uint64': 5, 'uint8': 2, ...}</td></tr></table>
 </body></html>
