@@ -6,7 +6,7 @@ import sys
 prog_name = "pyamulecmd"
 prog_ver  = "0.1"
 
-host = "192.168.149.109"
+host = b"192.168.149.109"
 port = 4712
 
 class REPL(cmd.Cmd):
@@ -16,7 +16,7 @@ class REPL(cmd.Cmd):
         self.intro = "Welcome to %s %s" % (prog_name, prog_ver)
         self.ec = None
     def preloop(self):
-        passwd = getpass.getpass("Password: ")
+        passwd = getpass.getpass("Password: ").encode(encoding='utf_8', errors='strict')
         try:
             self.ec = ec.conn(passwd, host, port, prog_name, prog_ver)
         except ec.ConnectionFailedError:
@@ -32,6 +32,8 @@ class REPL(cmd.Cmd):
         self.ec.connect()
     def do_disconnect(self, arg):
         self.ec.disconnect()
+    def do_status(self, arg):
+        print (self.ec.get_status())
     def do_shutdown(self, arg):
         self.ec.shutdown()
         sys.exit()

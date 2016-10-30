@@ -12,7 +12,7 @@ def ECTagData(data):
     if type(data) == tuple:
         subtags = data[1]
         num_subtags = len(subtags)
-        subtag_data += chr(num_subtags)
+        subtag_data += num_subtags
         for tag in subtags:
             subtag_data += ECTag(tag[0],tag[1])
         data = data[0]
@@ -97,13 +97,13 @@ def ReadTag(data, utf8_nums = True):
     else:
         name_len = 2
         tag_value, = unpack("!H",data[:2])
-    tag_name = tag_value/2
+    tag_name = int(tag_value/2)
     tag_has_subtags = (tag_value%2 == 1)
     data_len, data = ReadTagData(data[name_len:], tag_has_subtags, utf8_nums)
     return name_len + data_len , tag_name, data
 
 def ReadTagData(data, tag_has_subtags=False, utf8_nums = True):
-    type = ord(data[0])
+    type = data[0]
     if utf8_nums:
         utf_len, length = ReadUTF8Num(data[1:])
         tag_data = data[1+utf_len:]
@@ -127,7 +127,7 @@ def ReadTagData(data, tag_has_subtags=False, utf8_nums = True):
             length += subtag_len
             subtags.append((subtag_name, subtag_data))
         tag_data = tag_data[offset:]
-    if type in [tagtype['uint8'], tagtype['uint16'], tagtype['uint32'], tagtype['uint64']]:
+    if type in [tagtype['uint8'], tagtype['uint16'], tagtype['uint32'], tagtype['uint64'],tagtype['uint128']]:
         intlen = 1
         if type == tagtype['uint16']:
             intlen = 2
@@ -135,6 +135,8 @@ def ReadTagData(data, tag_has_subtags=False, utf8_nums = True):
             intlen = 4
         if type == tagtype['uint64']:
             intlen = 8
+        if type == tagtype['uint128']:
+            intlen = 16
         if tag_has_subtags:
             length += intlen
         value = ReadInt(tag_data[:intlen])
@@ -162,7 +164,8 @@ def ReadInt(data):
     fmtStr = { 1: "!B",
                2: "!H",
                4: "!I",
-               8: "!Q"}.get(len(data), "")
+               8: "!Q",
+              16: "!QQ"}.get(len(data), "")
     if fmtStr == "":
         raise ValueError("ReadInt: Wrong length for number: %d [%s]" %(len(data),repr(data)))
     return unpack(fmtStr, data)[0]
@@ -176,7 +179,7 @@ def ReadIPv4(data):
     return "%d.%d.%d.%d:%d"% (a,b,c,d,port)
 
 def ReadString(data):
-    return str(data[:data.find('\x00')],"utf8")
+    return str(data[:data.find(b'\x00')],"utf8")
 
 def ReadHash(data):
     if len(data) != 16:
