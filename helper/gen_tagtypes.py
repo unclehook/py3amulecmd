@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# TODO: find and solve: wrong generation tagtype['uint128'] 10 instead of 1
 import re
 
 print('tagtype = {}')
