@@ -57,6 +57,7 @@ class REPL(cmd.Cmd):
             print ("  -v, --version", " " * 20, "Print version to terminal")
             print ("  -s, --server=<server name or ip>", " " * 1, "Set domain name or ip of the aMule Server")
             print ("  -p, --port=<port number>", " " * 9, "Set port number of the server")
+            print ("  -w, --password=<password>", " " * 8, "Set password the server")
             print ("  -h, --help", " " * 23, "Display this help screen")
             print ()
         
